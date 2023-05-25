@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { fetchData } from './utils/fetchData'
+import "chart.js/auto"
+import Header from './components/Header'
+import Dashboard from './pages/Dashboard'
+import Orders from './pages/Orders'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+
+  // State to store the orders
+  const [orders, setOrders] = useState([])
+
+  // Fetch orders when the component firstly mounts
+  useEffect((
+  ) => {
+    const fetchOders = async () => {
+
+      // Fetch orders data from the API
+      const fetchOrders = await fetchData('Orders')
+
+      // Set the orders state with the fetched data
+      setOrders(fetchOrders.value)
+    }
+
+    fetchOders()
+
+  }, [])
+
+
+
+  return (<>
+    <Header />
+    < Routes >
+      <Route path='/' element={<Dashboard orders={orders} />} />
+      <Route path='/orders' element={<Orders orders={orders} />} />
+    </Routes >
+  </>
+  )
 }
 
-export default App;
+export default App
