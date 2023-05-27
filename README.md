@@ -7,7 +7,7 @@ This small project was built with React, Bootstrap, react-chartjs-2 and react-bo
 1. This assumes that nodejs is installed from https://nodejs.org/en
 2. In the project directory, run the command:
 
-### `npm install`
+### `npm install --legacy-peer-deps`
 
 3. Then run the command:
 

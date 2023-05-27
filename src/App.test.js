@@ -10,6 +10,9 @@ jest.mock('./utils/fetchData', () => ({
   fetchData: jest.fn(),
 }))
 
+
+
+
 describe('Dashboard page', () => {
 
   const mockOrders = {
@@ -59,7 +62,7 @@ describe('Dashboard page', () => {
         <App />
       </BrowserRouter>)
 
-    await screen.findByText('Average processing time per month')
+    await screen.findByTestId('average-processing-chart')
     expect(screen.getByTestId('average-processing-chart')).toBeInTheDocument()
   })
 
@@ -74,6 +77,7 @@ describe('Dashboard page', () => {
 
     await screen.findByText('Total orders per month')
     expect(screen.getByTestId('total-orders-chart')).toBeInTheDocument()
+
   })
 
   it('navigates to /orders after clicking explore details button', () => {
